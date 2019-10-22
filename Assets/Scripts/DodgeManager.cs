@@ -16,7 +16,7 @@ public class DodgeManager : MonoBehaviour {
     private float playerHeight;
 
     void Start() {
-        playerHeight = this.transform.size.y / 2f;
+        playerHeight = this.transform.localScale.y / 2f;
         startPosition = this.transform.position - new Vector3(0, playerHeight, 0);
     }
 
@@ -33,7 +33,7 @@ public class DodgeManager : MonoBehaviour {
             }
         }
 
-        this.transform.localRotation = new Vector3(0, 0, angle);
-        this.transform.position = startPosition + (new Vector3(-leanDirection * Mathf.sin(angle), Mathf.cos(angle), 0f) * playerHeight);
+        this.transform.localRotation = Quaternion.Euler(0, 0, angle);
+        this.transform.position = startPosition + (new Vector3(-leanDirection * Mathf.Sin(angle), Mathf.Cos(angle), 0f) * playerHeight);
     }
 }
