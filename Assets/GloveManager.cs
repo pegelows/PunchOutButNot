@@ -34,7 +34,6 @@ public class GloveManager : MonoBehaviour
     void Update()
     {
         float sqrDistance = (player.transform.position - this.transform.position).sqrMagnitude;
-        Debug.Log("glove distance:" + Mathf.Sqrt(sqrDistance));
         //If the glove is held close to the player
         if (sqrDistance < chargingDistance * chargingDistance)
         {
@@ -61,8 +60,8 @@ public class GloveManager : MonoBehaviour
             }
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
+    
+    private void OnTriggerEnter(Collider c)
     {
         float sqrDistance = (player.transform.position - this.transform.position).sqrMagnitude;
 
@@ -73,7 +72,7 @@ public class GloveManager : MonoBehaviour
         }
         else //This is a punch we threw
         {
-            string tag = collision.gameObject.tag;
+            string tag = c.gameObject.tag;
 
             switch (tag)
             {
@@ -81,13 +80,16 @@ public class GloveManager : MonoBehaviour
                     //The punch was blocked
                     currentCharge = 0;
                     UpdateGloveGlow();
-
                     break;
                 case "Head":
-
+                    Debug.Log("Head Hit");
+                    currentCharge = 0;
+                    UpdateGloveGlow();
                     break;
                 case "Body":
-
+                    Debug.Log("Body Hit");
+                    currentCharge = 0;
+                    UpdateGloveGlow();
                     break;
             }
         }
