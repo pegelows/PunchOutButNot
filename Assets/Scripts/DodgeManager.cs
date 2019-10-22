@@ -7,11 +7,11 @@ public class DodgeManager : MonoBehaviour {
     public float maxLeanAngle = 45f; // Degrees
 
     public float snapToDistance = 35f;
-    public float snapAtDistance = 15f;
+    public float snapAtDistance = 35f;
 
     public GameObject player;
     public GameObject playerViewport;
-
+    
     private Vector3 startPosition;
     private float playerHeight;
 
@@ -22,18 +22,33 @@ public class DodgeManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        float angle = playerViewport.transform.rotation.z;
-        float leanDirection = Mathf.Abs(angle) / angle;
+        float angle = playerViewport.transform.eulerAngles.z;
+        float leanDirection = (Mathf.Abs(angle) > 180f) ? -1f : 1f;
 
         if (snapToAngle) {
-            if (Mathf.Abs(angle) > snapAtDistance) {
-                angle = snapToDistance * leanDirection;
+            if (leanDirection == 1f) {
+                if (angle > snapAtDistance) {
+                    angle = snapToDistance * leanDirection;
+                } else {
+                    angle = 0f;
+                }
             } else {
-                angle = 0f;
+                if (angle < 360f - snapAtDistance) {
+                    angle = snapToDistance * leanDirection;
+                } else {
+                    angle = 0f;
+                }
+            }
+        } else {
+            if (leanDirection == 1f) {
+                angle = Mathf.Min(angle, maxLeanAngle);
+            } else {
+                angle = Mathf.Max(angle, maxLeanAngle);
             }
         }
 
-        this.transform.localRotation = Quaternion.Euler(0, 0, angle);
-        this.transform.position = startPosition + (new Vector3(-leanDirection * Mathf.Sin(angle), Mathf.Cos(angle), 0f) * playerHeight);
+        this.transform.rotation = Quaternion.Euler(0, 0, angle);
+        angle *= Mathf.Deg2Rad;
+        this.transform.position = startPosition + (new Vector3(-Mathf.Sin(angle), Mathf.Cos(angle), 0f) * playerHeight);
     }
 }
