@@ -23,16 +23,16 @@ public class DodgeManager : MonoBehaviour {
     private bool crouching = false;
 
     void Start() {
-        startViewportPosition = playerViewport.transform.position;
+        startViewportPosition = playerViewport.transform.localPosition;
         playerHeight = this.transform.localScale.y / 2f;
-        startPosition = this.transform.position - new Vector3(0, playerHeight, 0);
+        startPosition = this.transform.localPosition - new Vector3(0, playerHeight, 0);
     }
 
     // Update is called once per frame
     void Update() {
         float angle = 0f;// playerViewport.transform.eulerAngles.z;
 
-        float xOffset = (playerViewport.transform.position - startViewportPosition).x;
+        float xOffset = (playerViewport.transform.localPosition - startViewportPosition).x;
 
         if (xOffset > leanXOffset)
         {
@@ -86,7 +86,7 @@ public class DodgeManager : MonoBehaviour {
         }*/
 
         
-        if (!leaning && (playerViewport.transform.position - startViewportPosition).y < -duckingYOffset)
+        if (!leaning && (playerViewport.transform.localPosition - startViewportPosition).y < -duckingYOffset)
         {
             this.transform.localScale = new Vector3(1f, 1f - duckingSnapToDistance, 1f);
             this.playerHeight = 0.5f * (1f - duckingSnapToDistance);
@@ -104,8 +104,8 @@ public class DodgeManager : MonoBehaviour {
 
         leaning = angle != 0f;
 
-        this.transform.rotation = Quaternion.Euler(0, 0, angle);
+        this.transform.localRotation = Quaternion.Euler(0, 0, angle);
         angle *= Mathf.Deg2Rad;
-        this.transform.position = this.startPosition + (new Vector3(-Mathf.Sin(angle), Mathf.Cos(angle)) * this.playerHeight);
+        this.transform.localPosition = this.startPosition + (new Vector3(-Mathf.Sin(angle), Mathf.Cos(angle)) * this.playerHeight);
     }
 }
