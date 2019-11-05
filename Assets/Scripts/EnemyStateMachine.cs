@@ -6,20 +6,16 @@ public class EnemyStateMachine : MonoBehaviour
 {
     public IAIState currentState;
 
+    public SpawnState spawnState;
     public AttackState attackState;
     public ChaseState chaseState;
     public AIKOState aIKOState;
     public HurtState hurtState;
-
     
-    public FollowPlayer followPlayer;
-
-    
-
     void Start()
     {
-        currentState = chaseState;
-        chaseState.OnStateEnter(null, this);
+        currentState = spawnState;
+        spawnState.OnStateEnter(null, this);
     }
 
     void Update()
