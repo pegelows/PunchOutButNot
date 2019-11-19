@@ -18,6 +18,7 @@ public class GloveManager : MonoBehaviour
     public Color fullChargeColor; //- The color the gloves should be when at maxCharge
     public Color zeroChargeColor; //- The color the gloves should be when at 0 charge
 
+    public string tagToHit; //- the tag that this glove is able to hit "Enemy" or "Player"
 
     public Collider gloveCollider;
     public GameObject player;
@@ -71,13 +72,16 @@ public class GloveManager : MonoBehaviour
         }
         else //This is a punch we threw
         {
-            HittableLocation hitLocation = c.gameObject.GetComponent<HittableLocation>();
-            
-            if(hitLocation)
+            if (c.gameObject.tag.Equals(tagToHit))
             {
-                hitLocation.ApplyDamage(punchDamage * currentCharge / 100f);
-                currentCharge = 0;
-                UpdateGloveGlow();
+                HittableLocation hitLocation = c.gameObject.GetComponent<HittableLocation>();
+
+                if (hitLocation)
+                {
+                    hitLocation.ApplyDamage(punchDamage * currentCharge / 100f);
+                    currentCharge = 0;
+                    UpdateGloveGlow();
+                }
             }
         }
     }
