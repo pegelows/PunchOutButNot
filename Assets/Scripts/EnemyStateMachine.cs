@@ -11,10 +11,13 @@ public class EnemyStateMachine : MonoBehaviour
     public ChaseState chaseState;
     public AIKOState aIKOState;
     public HurtState hurtState;
-    
+
+
+    public Animator anim;
     void Start()
     {
-        currentState = spawnState;
+        anim = GetComponentInChildren<Animator>();
+        currentState = attackState;
         spawnState.OnStateEnter(null, this);
     }
 
