@@ -27,14 +27,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3264188813642899970}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 0.099999994}
+  m_LocalScale: {x: 0.175, y: -0.175, z: 0.15}
   m_Children:
   - {fileID: 7923535283320871293}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!33 &3264188813642899974
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -50,7 +50,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3264188813642899970}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -91,8 +91,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.9, y: 1, z: 1.5}
+  m_Center: {x: -0.12, y: 0, z: -0.01}
 --- !u!114 &3264188813642900025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,7 +118,7 @@ MonoBehaviour:
   tagToHit: Enemy
   gloveCollider: {fileID: 3264188813642899972}
   player: {fileID: 0}
-  gloveMesh: {fileID: 3264188813642899975}
+  gloveMesh: {fileID: 7923535283322641309}
 --- !u!1001 &7923535283320734717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -128,7 +128,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: ef0264bd8ab5bd04fb60504fba4fdc4c, type: 3}
       propertyPath: m_Name
-      value: bxglvsp(right)
+      value: GloveMesh
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ef0264bd8ab5bd04fb60504fba4fdc4c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -191,6 +191,12 @@ PrefabInstance:
 --- !u!4 &7923535283320871293 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: ef0264bd8ab5bd04fb60504fba4fdc4c,
+    type: 3}
+  m_PrefabInstance: {fileID: 7923535283320734717}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7923535283322641309 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: ef0264bd8ab5bd04fb60504fba4fdc4c,
     type: 3}
   m_PrefabInstance: {fileID: 7923535283320734717}
   m_PrefabAsset: {fileID: 0}
