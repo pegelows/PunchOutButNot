@@ -10,8 +10,7 @@ public class GloveManager : MonoBehaviour
     public float currentCharge; //- the current amount of charge the glove has
     public float maxCharge; //- what is the maximum amount of charge the glove can have
 
-    public float headPunchDamage; //- the amount of damage a punch to the opponent's head will do
-    public float bodyPunchDamage; //- the amount of damage a punch to the body will do
+    public float punchDamage; //- the base amount of damage a punch will do
 
     public float punchDuration; //- the amount of time the glove has been outside the chargingDistance of the player
     public float punchTimeBeforeDrain; //- the amount of time the glove has to be outside the chargingDistance before the charge starts decreasing
@@ -19,6 +18,7 @@ public class GloveManager : MonoBehaviour
     public Color fullChargeColor; //- The color the gloves should be when at maxCharge
     public Color zeroChargeColor; //- The color the gloves should be when at 0 charge
 
+    public string tagToHit; //- the tag that this glove is able to hit "Enemy" or "Player"
 
     public Collider gloveCollider;
     public GameObject player;
@@ -72,25 +72,16 @@ public class GloveManager : MonoBehaviour
         }
         else //This is a punch we threw
         {
-            string tag = c.gameObject.tag;
-
-            switch (tag)
+            if (c.gameObject.tag.Equals(tagToHit))
             {
-                case "Glove":
-                    //The punch was blocked
+                HittableLocation hitLocation = c.gameObject.GetComponent<HittableLocation>();
+
+                if (hitLocation)
+                {
+                    hitLocation.ApplyDamage(punchDamage * currentCharge / 100f);
                     currentCharge = 0;
                     UpdateGloveGlow();
-                    break;
-                case "Head":
-                    Debug.Log("Head Hit");
-                    currentCharge = 0;
-                    UpdateGloveGlow();
-                    break;
-                case "Body":
-                    Debug.Log("Body Hit");
-                    currentCharge = 0;
-                    UpdateGloveGlow();
-                    break;
+                }
             }
         }
     }
