@@ -8,6 +8,7 @@ TagManager:
   - Head
   - Body
   - Enemy
+  - MainMenu
   layers:
   - Default
   - TransparentFX
