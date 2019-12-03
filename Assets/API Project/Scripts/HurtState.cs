@@ -3,17 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class ChaseState : IAIState
+public class HurtState : IAIState
 {
-    /// <summary>
-    /// If statements must be used to assign different chase parameters for each enemy type, subtype,
-    /// and whether Hive Mind is present or not, by Tags
-    /// </summary>
-    /// <param name="previousState"></param>
-    /// <param name="stateMachine"></param>
-
-    [SerializeField] private float chaseAcceleration;
-
+    // The HurtState determines if the enemy has been hurt enough to be stunned.
     public void OnStateEnter(IAIState previousState, EnemyStateMachine stateMachine)
     {
 
