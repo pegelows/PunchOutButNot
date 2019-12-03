@@ -25,6 +25,8 @@ public class ChaseState : IAIState
     [SerializeField] private float attackDamage;
     [Tooltip("How fast the AI will chase after the player.")]
     [SerializeField] private float chaseAcceleration;
+    [Tooltip("How fast the AI will turn towards the player.")]
+    [SerializeField] private float rotateSpeed;
 
     public void OnStateEnter(IAIState previousState, EnemyStateMachine stateMachine)
     {
@@ -80,6 +82,19 @@ public class ChaseState : IAIState
             {
                 cooldownRemaining -= Time.deltaTime;
             }
+        }
+        else
+        {
+            //find the vector pointing from our position to the target
+            Vector3 direction = (stateMachine.player.transform.position - stateMachine.transform.position);
+            direction.y = 0;
+            direction = direction.normalized;
+
+            //create the rotation we need to be in to look at the target
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+            //rotate us over time according to speed until we are in the required rotation
+            stateMachine.transform.rotation = Quaternion.Slerp(stateMachine.transform.rotation, lookRotation, Time.deltaTime * rotateSpeed);
         }
     }
 

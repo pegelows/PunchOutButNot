@@ -17,6 +17,10 @@ public class AttackState : IAIState
     public int randomAttack;
     [Tooltip("The range within which the enemy will attempt to punch the player again")]
     public float attackRange;
+
+    [Tooltip("How fast the AI will turn towards the player.")]
+    [SerializeField] private float rotateSpeed;
+
     //PlayerHealth here
     // Determines if the Player is in range and can be hit
     public bool canHitPlayer;
@@ -42,7 +46,18 @@ public class AttackState : IAIState
     {
         timeElapsed += Time.deltaTime;
 
-        if(canHitPlayer == false && timeElapsed >= attackDelay)
+        //find the vector pointing from our position to the target
+         Vector3 direction = (stateMachine.player.transform.position - stateMachine.transform.position);
+        direction.y = 0;
+        direction = direction.normalized;
+
+        //create the rotation we need to be in to look at the target
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+        //rotate us over time according to speed until we are in the required rotation
+        stateMachine.transform.rotation = Quaternion.Slerp(stateMachine.transform.rotation, lookRotation, Time.deltaTime * rotateSpeed);
+
+        if (canHitPlayer == false && timeElapsed >= attackDelay)
         {
             canHitPlayer = true;
         }
