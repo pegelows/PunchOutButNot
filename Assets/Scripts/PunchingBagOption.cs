@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PunchingBagOption : MonoBehaviour {
-    public void OnCollisionEnter(Collider other) {
+    public void Start() { Debug.Log(0); }
+
+    private void OnTriggerEnter(Collider other) {
         if (other.GetComponent<GloveManager>() != null)
         {
             if (this.name == "Start")
