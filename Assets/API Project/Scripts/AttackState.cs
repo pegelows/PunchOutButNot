@@ -15,6 +15,8 @@ public class AttackState : IAIState
     public float timeElapsed;
     [Tooltip("The type of combos that the enemy chooses from.")]
     public int randomAttack;
+    [Tooltip("The range within which the enemy will attempt to punch the player again")]
+    public float attackRange;
     //PlayerHealth here
     // Determines if the Player is in range and can be hit
     public bool canHitPlayer;
@@ -50,6 +52,14 @@ public class AttackState : IAIState
             if(hasHitplayer == true)
             {
                 stateMachine.ChangeState(stateMachine.currentState);
+            }
+            else if (Vector3.Distance(stateMachine.player.transform.position, stateMachine.transform.position)<= attackRange)
+            {
+                stateMachine.ChangeState(stateMachine.currentState);
+            }
+            else
+            {
+                stateMachine.ChangeState(stateMachine.chaseState);
             }
        }
 

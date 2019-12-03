@@ -18,6 +18,7 @@ public class EnemyStateMachine : MonoBehaviour
     [Tooltip("Determines if enemy AI boxer has been injured enough to be stunned.")]
     public HurtState hurtState;
 
+    public GameObject player;
 
     public Animator anim;
     void Start()
@@ -28,8 +29,8 @@ public class EnemyStateMachine : MonoBehaviour
             anim = GetComponentInChildren<Animator>();
         }
         // This is the starting state for the enemy AI. It will then go into ChaseState if it is out of range of an attack.
-        currentState = attackState;
-        spawnState.OnStateEnter(null, this);
+        currentState = chaseState;
+        chaseState.OnStateEnter(null, this);
     }
 
     void Update()

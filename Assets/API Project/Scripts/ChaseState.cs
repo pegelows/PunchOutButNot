@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 [System.Serializable]
-public class ChaseState : MonoBehaviour, IAIState
+public class ChaseState : IAIState
 {
     /// <summary>
     /// If statements must be used to assign different chase parameters for each enemy type, subtype,
@@ -12,11 +12,7 @@ public class ChaseState : MonoBehaviour, IAIState
     /// <param name="previousState"></param>
     /// <param name="stateMachine"></param>
     [SerializeField] private UnityEngine.AI.NavMeshAgent agent;
-    [SerializeField] private Transform target;
-
-    [SerializeField] private string targetableTags;
-
-    [SerializeField] private bool hasTarget = false;
+    
     [Tooltip("This determines how far from the player the enemy AI will see in world space to check if it chases the player.")]
     [SerializeField] private float searchRange;
     [Tooltip("This variable determines the range the enemy AI must be from the player to attack.")]
@@ -32,10 +28,9 @@ public class ChaseState : MonoBehaviour, IAIState
 
     public void OnStateEnter(IAIState previousState, EnemyStateMachine stateMachine)
     {
-        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        agent = stateMachine.GetComponent<UnityEngine.AI.NavMeshAgent>();
 
         cooldownRemaining = attackCooldown;
-        hasTarget = false;
     }
 
     public void OnStateExit(IAIState nextState, EnemyStateMachine stateMachine)
@@ -45,28 +40,28 @@ public class ChaseState : MonoBehaviour, IAIState
 
     public void OnStateUpdate(EnemyStateMachine stateMachine)
     {
-        if (hasTarget)
+        // Ensure the boxer is still alive
+        if (stateMachine.player == null)
         {
-            // Ensure the boxer is still alive
-            if (target == null)
-            {
-                // This is to clear boxer's current location such as when the current target dies
-                target = null;
-                hasTarget = false;
-                agent.destination = this.transform.position;
-                return;
-            }
+            // This is to clear boxer's current location such as when the current target dies
+            stateMachine.player = null;
+            agent.destination = stateMachine.transform.position;
+            return;
+        }
 
-
+        if (Vector3.Distance(stateMachine.player.transform.position, stateMachine.transform.position) < searchRange)
+        {
             // Follow Target
-            agent.destination = target.position;
+            agent.destination = stateMachine.player.transform.position;
             // Check if it's possible to attack target according to the cooldown time between attacks
 
             if (cooldownRemaining <= 0)
             {
-                float squareDistance = (this.transform.position - target.position).sqrMagnitude;//Square distance is faster computationally
+                float squareDistance = (stateMachine.transform.position - stateMachine.player.transform.position).sqrMagnitude;//Square distance is faster computationally
                 if (squareDistance <= attackRange * attackRange)
                 {
+                    agent.destination = stateMachine.transform.position;
+                    stateMachine.ChangeState(stateMachine.attackState);
                     // Within attack range to attack the target
                     // PlayerHealth targetHealth = target.GetComponent<PlayerHealth>();
                     // if (targetHealth != null)
@@ -84,22 +79,6 @@ public class ChaseState : MonoBehaviour, IAIState
             else
             {
                 cooldownRemaining -= Time.deltaTime;
-            }
-        }
-        else
-        {
-            // Look for the boxer in range in case we want to make the compAI not follow
-            // if the player is a certain distance away
-            Collider[] objectsInRange = Physics.OverlapSphere(this.transform.position, searchRange);
-
-            foreach (Collider c in objectsInRange)
-            {
-                if (targetableTags.Contains(c.tag))
-                {
-                    hasTarget = true;
-                    target = c.transform;
-                }
-
             }
         }
     }
