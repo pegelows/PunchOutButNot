@@ -34,15 +34,11 @@ public class DodgeManager : MonoBehaviour {
 
         float xOffset = (playerViewport.transform.localPosition - startViewportPosition).x;
 
-        if (xOffset > leanXOffset)
-        {
+        if (xOffset > leanXOffset) {
             angle = 360f - snapToDistance;
-        }
-        else if (xOffset < -leanXOffset)
-        {
+        } else if (xOffset < -leanXOffset) {
             angle = snapToDistance;
-        }
-        else { }
+        } else { }
         /*else
         {
             leanDirection = (Mathf.Abs(angle) > 180f) ? -1f : 1f;
@@ -86,14 +82,11 @@ public class DodgeManager : MonoBehaviour {
         }*/
 
         
-        if (!leaning && (playerViewport.transform.localPosition - startViewportPosition).y < -duckingYOffset)
-        {
+        if (!leaning && (playerViewport.transform.localPosition - startViewportPosition).y < -duckingYOffset) {
             this.transform.localScale = new Vector3(1f, 1f - duckingSnapToDistance, 1f);
             this.playerHeight = 0.5f * (1f - duckingSnapToDistance);
             crouching = true;
-        }
-        else
-        {
+        } else {
             this.transform.localScale = new Vector3(1f, 1f, 1f);
             this.playerHeight = 0.5f;
             crouching = false;

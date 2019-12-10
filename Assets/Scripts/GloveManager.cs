@@ -86,7 +86,7 @@ public class GloveManager : MonoBehaviour
         }
     }
 
-    void UpdateGloveGlow()
+    public void UpdateGloveGlow()
     {
         Color interp = Color.Lerp(zeroChargeColor, fullChargeColor, (currentCharge / maxCharge));
         gloveMesh.material.color = interp;
