@@ -55,6 +55,7 @@ public class ChaseState : IAIState
         {
             // Follow Target
             agent.destination = stateMachine.player.transform.position;
+            stateMachine.anim.Play("Movement");
             // Check if it's possible to attack target according to the cooldown time between attacks
 
             if (cooldownRemaining <= 0)

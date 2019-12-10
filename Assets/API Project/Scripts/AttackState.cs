@@ -6,7 +6,7 @@ using UnityEngine;
 public class AttackState : IAIState
 {
     [Tooltip("How much damage the enemy does on an attack.")]
-    [SerializeField] private float damage;
+    [SerializeField] public float damage;
     [Tooltip("How often the enemy can attack.")]
     [SerializeField] private float attackDelay;
     [Tooltip("How long the enemy can attack for.")]
@@ -114,9 +114,8 @@ public class AttackState : IAIState
             //Will need adjusting based on animations
             attackDuration = 4f;
             //Play animation
-            stateMachine.anim.Play("Lead Jab");
+            stateMachine.anim.Play("Body Cross");
            
-            Debug.Log("Three hit combo");
         }
         if(randomAttack >= 9 && randomAttack <= 10)
         {

@@ -64,7 +64,7 @@ public class GloveManager : MonoBehaviour
     private void OnTriggerEnter(Collider c)
     {
         float sqrDistance = (player.transform.position - this.transform.position).sqrMagnitude;
-
+        
         //Is this a block?
         if (sqrDistance < chargingDistance * chargingDistance)
         {

@@ -22,6 +22,5 @@ public class HittableLocation : MonoBehaviour
     public void ApplyDamage(float damageToGive)
     {
         health.ApplyDamage(damageToGive * damageModifier);
-        Debug.Log("Damage dealt: " + (damageModifier * damageToGive));
     }
 }
