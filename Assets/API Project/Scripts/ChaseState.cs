@@ -37,7 +37,7 @@ public class ChaseState : IAIState
 
     public void OnStateExit(IAIState nextState, EnemyStateMachine stateMachine)
     {
-
+        
     }
 
     public void OnStateUpdate(EnemyStateMachine stateMachine)
@@ -55,7 +55,7 @@ public class ChaseState : IAIState
         {
             // Follow Target
             agent.destination = stateMachine.player.transform.position;
-            stateMachine.anim.Play("Movement");
+            stateMachine.anim.SetFloat("vertical", 1f);
             // Check if it's possible to attack target according to the cooldown time between attacks
 
             if (cooldownRemaining <= 0)

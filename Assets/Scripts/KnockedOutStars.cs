@@ -18,7 +18,10 @@ public class KnockedOutStars : MonoBehaviour {
     [SerializeField] private float rotationSpeed = 0.25f;
     [SerializeField] private float spinSpeed = 0.375f;
 
-	public void Start() {
+    public HealthManager healthManager;
+    public EnemyStateMachine enemy;
+
+    public void Start() {
 		mainCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
 		transform.parent = mainCamera;
 	}
@@ -51,13 +54,20 @@ public class KnockedOutStars : MonoBehaviour {
 					child.localPosition = new Vector3(Mathf.Sin(childAngle), 0f, Mathf.Cos(childAngle)) * distance;
 					child.localEulerAngles = new Vector3(0, currentEulerAngle + ((360f / starCount) * i));
 				}
-			} else { GetUp(); }
+			}
+            else
+            {
+                GetUp();
+            }
 		}
     }
 
     private void GetUp() {
 		starCount = 0;
 		isKnockedDown = false;
+
+        enemy.ChangeState(enemy.chaseState);
+        healthManager.currentHP = healthManager.maxHP / (1f + knockedDownStage);
     }
 
     public void KnockedDown() {
@@ -77,6 +87,8 @@ public class KnockedOutStars : MonoBehaviour {
 			}
 
 			starCount = knockedDownStage * starsPerStage;
+
+            enemy.ChangeState(enemy.waitState);
 		}
     }
 }

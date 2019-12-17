@@ -422,14 +422,86 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2080002760}
-    m_RemovedComponents: []
+    - target: {fileID: 1893530277, guid: 0584f8d66b6487946b9e36b3d103872a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1893530277, guid: 0584f8d66b6487946b9e36b3d103872a, type: 3}
+    - {fileID: 1893530278, guid: 0584f8d66b6487946b9e36b3d103872a, type: 3}
+    - {fileID: 1599665618, guid: 0584f8d66b6487946b9e36b3d103872a, type: 3}
+    - {fileID: 1599665619, guid: 0584f8d66b6487946b9e36b3d103872a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0584f8d66b6487946b9e36b3d103872a, type: 3}
+--- !u!1 &1133719606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1133719608}
+  - component: {fileID: 1133719607}
+  m_Layer: 0
+  m_Name: Stars
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1133719607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133719606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab26dc202e88833479449672dfcc603a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  starPrefab: {fileID: 5948769680292256757, guid: a543fc43cd0a2494ea3a75aea9ddbbb4,
+    type: 3}
+  starsPerStage: 2
+  distance: 0.5
+  heightOffset: 0.1
+  rotationSpeed: 0.25
+  spinSpeed: 0.375
+  healthManager: {fileID: 2080002761}
+  enemy: {fileID: 2082405714}
+--- !u!4 &1133719608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133719606}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2080002760 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100008, guid: ce816f2e6abb0504092c23ed9b970dfd,
     type: 3}
   m_PrefabInstance: {fileID: 2080101472}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2080002761 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 959250257, guid: ce816f2e6abb0504092c23ed9b970dfd,
+    type: 3}
+  m_PrefabInstance: {fileID: 2080101472}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080002760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94759ce15d67d70479af63af5fec4b5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2080101472
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -555,5 +627,25 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 959250257, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: isPlayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 959250257, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: stars
+      value: 
+      objectReference: {fileID: 1133719607}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+--- !u!114 &2082405714 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 427974807228891657, guid: 0584f8d66b6487946b9e36b3d103872a,
+    type: 3}
+  m_PrefabInstance: {fileID: 362985633}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 159fd6c071379c44a8375af812bff1fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

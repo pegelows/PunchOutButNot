@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HealthManager : MonoBehaviour
 {
     public int maxHP;
     public float currentHP;
 
+    public bool isPlayer;
+    public KnockedOutStars stars;
     void Start()
     {
         currentHP = maxHP;
@@ -14,18 +17,25 @@ public class HealthManager : MonoBehaviour
 
     void Update()
     {
-        if (currentHP <= 0)
-        {
-            gameObject.SetActive(false);
-            Debug.Log("No health left");
-            //SceneManager.LoadScene("Main Menu");
-
-        }
+        
     }
 
     public void ApplyDamage(float damageToGive)
     {
         currentHP -= damageToGive;
+
+        if (currentHP <= 0)
+        {
+            if (isPlayer)
+            {
+                stars.KnockedDown();
+                //SceneManager.LoadScene("Main Menu");
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
+        }
     }
 
     public void SetMaxHP()

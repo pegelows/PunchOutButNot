@@ -13,6 +13,8 @@ public class EnemyStateMachine : MonoBehaviour
     public AttackState attackState;
     [Tooltip("Enemy AI finds the player in world space, tracks the player, and chases the player down.")]
     public ChaseState chaseState;
+    [Tooltip("Enemy AI will simply idle")]
+    public WaitState waitState;
     [Tooltip("This determines if the enemy AI has been knocked out and placed in 'dead state'.")]
     public AIKOState aIKOState;
     [Tooltip("Determines if enemy AI boxer has been injured enough to be stunned.")]

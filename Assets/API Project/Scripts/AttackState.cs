@@ -35,6 +35,7 @@ public class AttackState : IAIState
         canHitPlayer = false;
         randomAttack = Random.Range(0, 10);
         ChooseCombo(stateMachine);
+        stateMachine.anim.SetFloat("vertical", 0f);
     }
 
     public void OnStateExit(IAIState nextState, EnemyStateMachine stateMachine)
